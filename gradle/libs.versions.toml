@@ -4,6 +4,7 @@ appcompat = "1.7.1"
 dalvikDx = "16.0.1"
 desugar_jdk_libs_nio = "2.1.5"
 firebaseBom = "34.8.0"
+gigachatJava = "0.1.18"
 sora-editor = "0.23.6"
 bundletool = "1.18.3"
 cardview = "1.0.0"
@@ -95,6 +96,7 @@ markwon = { module = "io.noties.markwon:core", version.ref = "markwon" }
 
 ecj = { module = "org.eclipse.jdt:ecj", version.ref = "ecj" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+gigachat-java = { module = "chat.giga:gigachat-java", version.ref = "gigachatJava" }
 
 kotlin-compiler = { module = "org.jetbrains.kotlin:kotlin-compiler", version.ref = "kotlinCompiler" }
 kotlinc-for1-sketchware = { module = "com.github.PranavPurwar:kotlinc-android", version.ref = "kotlincForSketchware" }

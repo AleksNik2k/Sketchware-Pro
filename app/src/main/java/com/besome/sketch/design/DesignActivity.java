@@ -169,6 +169,12 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
             }
         }
     });
+    private final ActivityResultLauncher<Intent> openGigaCodeAssistant = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        if (result.getResultCode() == RESULT_OK && result.getData() != null
+                && result.getData().getBooleanExtra("run_build", false)) {
+            startProjectBuild();
+        }
+    });
     private rs eventTabAdapter;
     private br componentTabAdapter;
     private final ActivityResultLauncher<Intent> openImageManager = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -217,6 +223,16 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
             projectMetadata.put("sketchware_ver", GB.d(getApplicationContext()));
             lC.b(sc_id, projectMetadata);
         }
+    }
+
+    private void startProjectBuild() {
+        if (currentBuildTask != null && !currentBuildTask.canceled && !currentBuildTask.isBuildFinished) {
+            currentBuildTask.cancelBuild();
+            return;
+        }
+        BuildTask buildTask = new BuildTask(this);
+        currentBuildTask = buildTask;
+        buildTask.execute();
     }
 
     private void loadProject(boolean haveSavedState) {
@@ -465,16 +481,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
         findViewById(R.id.file_name_container).setOnClickListener(this);
 
         btnRun = findViewById(R.id.btn_run);
-        btnRun.setOnClickListener(v -> {
-            if (currentBuildTask != null && !currentBuildTask.canceled && !currentBuildTask.isBuildFinished) {
-                currentBuildTask.cancelBuild();
-                return;
-            }
-
-            BuildTask buildTask = new BuildTask(this);
-            currentBuildTask = buildTask;
-            buildTask.execute();
-        });
+        btnRun.setOnClickListener(v -> startProjectBuild());
 
         btnOptions = findViewById(R.id.btn_options);
         btnOptions.setOnClickListener(v -> bottomPopupMenu.show());
@@ -515,6 +522,12 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
         });
         bottomMenu.add(Menu.NONE, 7, Menu.NONE, "Direct XML editor").setOnMenuItemClickListener(item -> {
             toViewCodeEditor();
+            return true;
+        });
+        bottomMenu.add(Menu.NONE, 8, Menu.NONE, "GigaCode assistant").setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(this, pro.sketchware.activities.ai.GigaCodeAssistantActivity.class);
+            intent.putExtra("sc_id", sc_id);
+            openGigaCodeAssistant.launch(intent);
             return true;
         });
         bottomPopupMenu.setOnDismissListener(menu -> btnOptions.setChecked(false));

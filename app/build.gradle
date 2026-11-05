@@ -107,6 +107,7 @@ dependencies {
     implementation libs.stringfog.xor
 
     implementation libs.gson
+    implementation libs.gigachat.java
     implementation libs.scpkix.jdk15on
 
     implementation libs.markwon

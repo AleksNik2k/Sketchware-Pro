@@ -111,6 +111,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="pro.sketchware.activities.ai.GigaCodeAssistantActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name="com.besome.sketch.editor.manage.view.ManageViewActivity"
             android:configChanges="orientation|screenSize" />
         <activity

@@ -38,6 +38,17 @@ We are deeply grateful to these developers for their work and contributions.
 	https://github.com/google/gson
 	Apache-2.0 License
 
+* GigaChat Java SDK
+
+  https://github.com/ai-forever/gigachat-java
+  MIT License
+  Version 0.1.18
+
+* Jackson-databind
+
+  https://github.com/FasterXML/jackson-databind
+  Apache-2.0 License
+
 * Jackson-annotations
 
 	https://github.com/FasterXML/jackson-annotations
